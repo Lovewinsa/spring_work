@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>sub/inc.html</title>
+
+<th:block th:insert="~{/include/resource}"></th:block>
+
+</head>
+<body>
+	<div class="container">
+		<h3>본문 내용입니다</h3>
+		<ul>
+			<li>하나</li>
+			<li>두울</li>
+		</ul>
+		
+	</div>
+	
+	<th:block th:insert="~{/include/footer :: myFooter}"></th:block>
+	
+	<div th:insert="~{/include/footer :: myFooter}" style="border: 1px dotted blue"></div>
+	
+	<div th:replace="~{/include/footer :: myFooter}" style="border:1px dotted blue"></div>
+	
+	<div th:replace="~{/include/footer :: yourFooter('peace&love')} "></div>
+	
+	<div th:replace="~{/include/footer :: yourFooter('death&curse')} "></div>
+</body>
+</html>

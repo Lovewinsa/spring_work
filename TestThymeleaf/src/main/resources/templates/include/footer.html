@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>include/footer.html</title>
+</head>
+<body>
+	<div th:fragment="myFooter" style="border:1px solid red">
+		<p>myFooter 입니다.</p>
+		<p>ㅇ쩌고...</p>
+		<p>저찌구...</p>
+	</div>
+	
+	<div th:fragment="yourFooter(title)" style="border:1px solid red">
+		<h3 th:text="${title}"></h3>
+		<p>ㅇ쩌고...</p>
+		<p>저찌구...</p>
+	</div>
+</body>
+</html>

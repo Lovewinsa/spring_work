@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="file">
+	<sql id="column">
+		num, writer, title, orgFileName, saveFileName, fileSize, regdate
+	</sql>
+	<select id="getList" resultType="fileDto">
+		select num, writer, title, orgFileName, regdate
+		from board_file
+		order by num asc
+	</select>
+	
+	<insert id="upload" parameterType="fileDto">
+		insert into board_file
+		( <include refid="column"></include> )
+		values(board_file_seq.NEXTVAL, #{writer}, #{title}, #{orgFileName}, #{saveFileName}, #{fileSize}, sysdate)		
+	</insert>
+	
+	<select id="getData" resultType="fileDto" parameterType="int">
+		select <include refid="column"></include>
+		from board_file
+		where num=#{num}
+	</select>
+	
+	<delete id="delete" parameterType="int">
+		delete from board_file
+		where num=#{num}
+	</delete>
+	
+	<select id="getSequence" resultType="int">
+		select board_file_seq.NEXTVAL
+		from dual
+	</select>
+	
+	<!-- null인 경우 0이라는 기본값을 가지게 하겠다 -->
+	<select id="getCount" resultType="int">
+		select NVL(max(rownum), 0) 
+		from board_file
+	</select>
+</mapper>

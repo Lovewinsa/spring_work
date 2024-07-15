@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>sub/buy.html</title>
+</head>
+<body>
+	<div class="class">
+		<h1>구매결과 페이지</h1>
+		<p>
+			<strong>[[${param.id }]]</strong> 번 상품
+			<strong th:text="${param.count }"></strong> 개 주문을 완료
+		</p>
+	</div>
+</body>
+</html>

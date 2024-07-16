@@ -10,6 +10,18 @@
 		<ul>
 			<li><a href="/test/person">오늘의 인물 보기</a></li>
 		</ul>
+			<ul class="pagination" th:if="${totalPageCount ne 0}">
+                <li th:if="${startPageNum != 1}" class="page-item">
+                    <a class="page-link" th:href="@{'/file/list?pageNum=' + ${startPageNum - 1}}">Prev</a>
+                </li>
+                <li th:each="i : ${#numbers.sequence(startPageNum, endPageNum)}" class="page-item" th:classappend="${i} == ${pageNum} ? 'active'">
+                    <a class="page-link" th:href="@{/file/list(pageNum=${i})}">[[${i}]]</a>
+                    						<!-- /file/list(parameterName=value, parameterName2=value2......) -->
+                </li>
+                <li th:if="${endPageNum < totalPageCount}" class="page-item">
+                    <a class="page-link" th:href="@{'/file/list?pageNum=' + ${endPageNum + 1} }">Next</a>
+                </li>
+            </ul>
 	</div>
 </body>
 </html>

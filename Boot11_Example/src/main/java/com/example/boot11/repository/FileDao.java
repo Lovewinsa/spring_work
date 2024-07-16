@@ -6,7 +6,7 @@ import com.example.boot11.dto.FileDto;
 
 public interface FileDao {
 	// 모든 파일목록 리턴
-	public List<FileDto> getList();
+	public List<FileDto> getList(FileDto Dto);
 	// 새로운 파일 올리기
 	public void upload(FileDto dto);
 	// 파일 하나 다운로드 받기
@@ -16,5 +16,7 @@ public interface FileDao {
 	// 저장할 글 번호를 미리 얻어내서 리턴하는 메소드
 	public int getSequence();
 	// 전체 글의 갯수를 리턴하는 메소드
-	public int getCount();
+	/* public int getCount(); */
+	// 검색조건에 맞는 글의 개수를 리턴하는 메소드
+	public int getCount(FileDto dto);
 }

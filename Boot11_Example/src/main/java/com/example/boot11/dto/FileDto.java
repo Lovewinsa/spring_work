@@ -24,6 +24,11 @@ public class FileDto {
 	private String regdate;
 	private MultipartFile myFile;
 	// 페이징 처리를 위한 필드
+	private int pageNum=1; // 페이지 번호 기본값은 1을 가지도록
 	private int startRowNum;
 	private int endRowNum;
+	// 검색 키워드 관련
+	// 검색 조건이 없는 경우 null이 출력되는걸 방지하기 위해 빈 문자열을 기본값으로 설정
+	private String condition="";
+	private String keyword="";
 }

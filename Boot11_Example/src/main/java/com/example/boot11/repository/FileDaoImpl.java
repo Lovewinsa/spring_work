@@ -14,14 +14,14 @@ public class FileDaoImpl implements FileDao {
 	@Autowired private SqlSession session;
 
 	@Override
-	public List<FileDto> getList() {
+	public List<FileDto> getList(FileDto dto) {
 		/*
 		 * 	mapper의 namespace : file
 		 * 	sql의 id : getList
 		 * 	resultType : FileDto
-		 * 	parameterType : 없음
+		 * 	parameterType : FileDto
 		 */
-		return session.selectList("file.getList");
+		return session.selectList("file.getList", dto);
 	}
 
 	@Override
@@ -71,12 +71,9 @@ public class FileDaoImpl implements FileDao {
 	}
 
 	@Override
-	public int getCount() {
-		/*	mapper의 namespace : file
-		 * 	sql의 id : getCount
-		 * 	resultType : int
-		 */
-		return session.selectOne("file.getCount");
+	public int getCount(FileDto dto) {
+		// TODO Auto-generated method stub
+		return session.selectOne("file.getCount", dto);
 	}
 
 }

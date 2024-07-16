@@ -9,7 +9,7 @@ import org.springframework.ui.Model;
 import com.example.boot11.dto.FileDto;
 
 public interface FileService {
-	public void getList(Model model);
+	public void getList(Model model, FileDto dto);
 	public void addFile(FileDto dto);
 	public ResponseEntity<InputStreamResource> getFileDate(int num);
 	public void removeFile(int num);

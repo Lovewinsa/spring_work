@@ -24,10 +24,15 @@ public class FileController {
 	
 	@Autowired FileService service;
 	
+	/*
+	 * 	FileDto에는 pageNum, condition, keyword값이 담길 수도 있다.
+	 * 	(GET방식 파라미터값이 넘어오면 담긴다)
+	 */
 	@GetMapping("/file/list")
-	public String list(Model m) {
+	public String list(Model m, FileDto dto) {
 		// 서비스 객체에 Model의 참조값을 전달해서 파일목록이 Model 객체에 담기도록 한다.
-		service.getList(m);
+		service.getList(m, dto);
+		// template 페이지에서 파일목록 응답하기
 		return "file/list";
 	}
 	

@@ -4,20 +4,41 @@
 	<sql id="column">
 		num, writer, title, orgFileName, saveFileName, fileSize, regdate
 	</sql>
-	<select id="getList" resultType="fileDto">
-		select num, writer, title, orgFileName, regdate
-		from board_file
-		order by num asc
+	<sql id="whereCondition">
+			<choose>
+				<when test="condition == 'title_filename'">
+					where title like '%' || #{keyword} || '%' or orgFileName like '%' || #{keyword} || '%'
+				</when>
+				<when test="condition == 'title'">
+					where title like '%' || #{keyword} || '%'
+				</when>
+				<when test="condition == 'writer'">
+					where writer like '%' || #{keyword} || '%'
+				</when>
+			</choose>
+		</sql>
+		
+	<select id="getList" resultType="fileDto" parameterType="fileDto">
+		
+		select *
+		from
+			(select result1.*, rownum as rnum 
+			from
+				(select num, writer, title, orgFileName, regdate
+				from board_file
+				<include refid="whereCondition"/>
+				order by num asc) result1)
+		where rnum between #{startRowNum} and #{endRowNum}	
 	</select>
 	
 	<insert id="upload" parameterType="fileDto">
 		insert into board_file
-		( <include refid="column"></include> )
+		( <include refid="column"/> )
 		values(board_file_seq.NEXTVAL, #{writer}, #{title}, #{orgFileName}, #{saveFileName}, #{fileSize}, sysdate)		
 	</insert>
 	
 	<select id="getData" resultType="fileDto" parameterType="int">
-		select <include refid="column"></include>
+		select <include refid="column"/>
 		from board_file
 		where num=#{num}
 	</select>
@@ -33,8 +54,9 @@
 	</select>
 	
 	<!-- null인 경우 0이라는 기본값을 가지게 하겠다 -->
-	<select id="getCount" resultType="int">
+	<select id="getCount" resultType="int" parameterType="fileDto">
 		select NVL(max(rownum), 0) 
 		from board_file
+		<include refid="whereCondition"/>
 	</select>
 </mapper>
